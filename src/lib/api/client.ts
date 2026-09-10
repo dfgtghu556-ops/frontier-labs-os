@@ -40,6 +40,7 @@ import type {
   TeamMember,
   TrainingRun,
 } from "./types";
+import { createMockApi } from "./mock-adapter";
 
 export interface LabApi {
   /** Identifies which implementation is serving data. */
@@ -87,21 +88,11 @@ let api: LabApi | null = null;
 /** Resolves the active API implementation. Mock until a backend is configured. */
 export function getApi(): LabApi {
   if (!api) {
-    // Lazy require keeps the mock module out of the critical path of a future
-    // real implementation swap.
-    // eslint-disable-next-line @typescript-eslint/no-require-imports
-    api = mockApiSingleton();
+    api = createMockApi();
   }
   return api;
 }
 
 export function setApi(next: LabApi) {
   api = next;
-}
-
-// Imported at the bottom to keep the contract the primary content of this file.
-import { createMockApi } from "./mock-adapter";
-
-function mockApiSingleton(): LabApi {
-  return createMockApi();
 }
