@@ -10,12 +10,33 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ComputeRouteImport } from './routes/compute'
+import { Route as DatasetsRouteImport } from './routes/datasets'
+import { Route as EvaluationRouteImport } from './routes/evaluation'
 import { Route as ExperimentsRouteImport } from './routes/experiments'
+import { Route as ModelsRouteImport } from './routes/models'
+import { Route as RegistryRouteImport } from './routes/registry'
 import { Route as ResearchRouteImport } from './routes/research'
+import { Route as TrainingRouteImport } from './routes/training'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ComputeRoute = ComputeRouteImport.update({
+  id: '/compute',
+  path: '/compute',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DatasetsRoute = DatasetsRouteImport.update({
+  id: '/datasets',
+  path: '/datasets',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EvaluationRoute = EvaluationRouteImport.update({
+  id: '/evaluation',
+  path: '/evaluation',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ExperimentsRoute = ExperimentsRouteImport.update({
@@ -23,40 +44,107 @@ const ExperimentsRoute = ExperimentsRouteImport.update({
   path: '/experiments',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ModelsRoute = ModelsRouteImport.update({
+  id: '/models',
+  path: '/models',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RegistryRoute = RegistryRouteImport.update({
+  id: '/registry',
+  path: '/registry',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ResearchRoute = ResearchRouteImport.update({
   id: '/research',
   path: '/research',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TrainingRoute = TrainingRouteImport.update({
+  id: '/training',
+  path: '/training',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/compute': typeof ComputeRoute
+  '/datasets': typeof DatasetsRoute
+  '/evaluation': typeof EvaluationRoute
   '/experiments': typeof ExperimentsRoute
+  '/models': typeof ModelsRoute
+  '/registry': typeof RegistryRoute
   '/research': typeof ResearchRoute
+  '/training': typeof TrainingRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/compute': typeof ComputeRoute
+  '/datasets': typeof DatasetsRoute
+  '/evaluation': typeof EvaluationRoute
   '/experiments': typeof ExperimentsRoute
+  '/models': typeof ModelsRoute
+  '/registry': typeof RegistryRoute
   '/research': typeof ResearchRoute
+  '/training': typeof TrainingRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/compute': typeof ComputeRoute
+  '/datasets': typeof DatasetsRoute
+  '/evaluation': typeof EvaluationRoute
   '/experiments': typeof ExperimentsRoute
+  '/models': typeof ModelsRoute
+  '/registry': typeof RegistryRoute
   '/research': typeof ResearchRoute
+  '/training': typeof TrainingRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/experiments' | '/research'
+  fullPaths:
+    | '/'
+    | '/compute'
+    | '/datasets'
+    | '/evaluation'
+    | '/experiments'
+    | '/models'
+    | '/registry'
+    | '/research'
+    | '/training'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/experiments' | '/research'
-  id: '__root__' | '/' | '/experiments' | '/research'
+  to:
+    | '/'
+    | '/compute'
+    | '/datasets'
+    | '/evaluation'
+    | '/experiments'
+    | '/models'
+    | '/registry'
+    | '/research'
+    | '/training'
+  id:
+    | '__root__'
+    | '/'
+    | '/compute'
+    | '/datasets'
+    | '/evaluation'
+    | '/experiments'
+    | '/models'
+    | '/registry'
+    | '/research'
+    | '/training'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ComputeRoute: typeof ComputeRoute
+  DatasetsRoute: typeof DatasetsRoute
+  EvaluationRoute: typeof EvaluationRoute
   ExperimentsRoute: typeof ExperimentsRoute
+  ModelsRoute: typeof ModelsRoute
+  RegistryRoute: typeof RegistryRoute
   ResearchRoute: typeof ResearchRoute
+  TrainingRoute: typeof TrainingRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -68,11 +156,46 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/compute': {
+      id: '/compute'
+      path: '/compute'
+      fullPath: '/compute'
+      preLoaderRoute: typeof ComputeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/datasets': {
+      id: '/datasets'
+      path: '/datasets'
+      fullPath: '/datasets'
+      preLoaderRoute: typeof DatasetsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/evaluation': {
+      id: '/evaluation'
+      path: '/evaluation'
+      fullPath: '/evaluation'
+      preLoaderRoute: typeof EvaluationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/experiments': {
       id: '/experiments'
       path: '/experiments'
       fullPath: '/experiments'
       preLoaderRoute: typeof ExperimentsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/models': {
+      id: '/models'
+      path: '/models'
+      fullPath: '/models'
+      preLoaderRoute: typeof ModelsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/registry': {
+      id: '/registry'
+      path: '/registry'
+      fullPath: '/registry'
+      preLoaderRoute: typeof RegistryRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/research': {
@@ -82,13 +205,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ResearchRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/training': {
+      id: '/training'
+      path: '/training'
+      fullPath: '/training'
+      preLoaderRoute: typeof TrainingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ComputeRoute: ComputeRoute,
+  DatasetsRoute: DatasetsRoute,
+  EvaluationRoute: EvaluationRoute,
   ExperimentsRoute: ExperimentsRoute,
+  ModelsRoute: ModelsRoute,
+  RegistryRoute: RegistryRoute,
   ResearchRoute: ResearchRoute,
+  TrainingRoute: TrainingRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
